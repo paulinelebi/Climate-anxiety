@@ -7,7 +7,7 @@ from modules.sector_actions import get_sector_actions
 from modules.location_profiles import get_canadian_provinces, get_regional_questions, get_local_resources
 from modules.canada_climate_summary import get_provincial_climate_summary
 
-st.set_page_config(page_title="🌍 Do you have climate anxiety? The Climate Score Index: Find yours!", layout="wide")
+st.set_page_config(page_title="🌍 Climate vulnerability score", layout="wide")
 
 import base64
 
@@ -64,7 +64,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("""
-    <h1 style='text-align: center; font-size: 48px;'> Climate Anxiety Score</h1>
+    <h1 style='text-align: center; font-size: 48px;'> Climate Vulnerability Score</h1>
     <p style='text-align: center; font-size: 20px;'>Understand your risks. Receive support. Take action.</p>
     <blockquote style='text-align: center; font-style: italic; color: #644;'>
         "In the depth of winter, I finally learned that within me there lay an invincible summer." – Albert Camus
