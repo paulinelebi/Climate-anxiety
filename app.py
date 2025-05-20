@@ -14,7 +14,7 @@ st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
     html, body, [class*="css"] {
-        font-family: 'Inter', sans-serif;
+        font-family: 'DM Sans', sans-serif;
         background-image: linear-gradient(to bottom right, #fceabb, #f8b500);
         color: #333333;
     }
@@ -27,14 +27,14 @@ st.markdown("""
     .stSelectbox > div > div {
         background-color: rgba(255,255,255,0.9);
         border-radius: 10px;
-        color: #111111;
+        color: #411111;
     }
     .stSlider > div {
-        color: #111111;
+        color: #311111;
     }
     .stButton > button {
         background-color: #2e7d32;
-        color: white;
+        color: purple;
         border-radius: 10px;
         padding: 0.5em 1em;
         font-weight: 600;
@@ -45,7 +45,7 @@ st.markdown("""
 st.markdown("""
     <h1 style='text-align: center; font-size: 48px;'> Climate Anxiety Score</h1>
     <p style='text-align: center; font-size: 20px;'>Understand your risks. Receive support. Take action.</p>
-    <blockquote style='text-align: center; font-style: italic; color: #444;'>
+    <blockquote style='text-align: center; font-style: italic; color: #644;'>
         "In the depth of winter, I finally learned that within me there lay an invincible summer." – Albert Camus
     </blockquote>
     <hr>
