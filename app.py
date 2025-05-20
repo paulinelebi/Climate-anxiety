@@ -41,7 +41,7 @@ custom_questions = get_regional_questions(location)
 st.markdown("### 🌍 Regional Questions")
 responses = [st.radio(q, ["Yes", "No"]) for q in custom_questions]
 
-if st.button("✨ Analyze My Profile"):
+if st.button("Ready to see your score? Click here"):
     region = location.split(" - ")[0]
     summary_data = get_provincial_climate_summary(location)
     sector_risk = get_sector_risk(sector)
@@ -69,27 +69,27 @@ if st.button("✨ Analyze My Profile"):
     })
 
 if "anxiety_score" in st.session_state:
-    st.markdown("## 📈 Your Results")
+    st.markdown("## 📈 Your results")
 
     with st.container():
-        st.subheader("🌡️ Local Climate Outlook")
+        st.subheader("🌡️ Local climate outlook")
         d = st.session_state.summary_data
-        st.metric("Avg Temp in 2020", f"{d['2020_temp']}°C")
-        st.metric("Avg Temp in 2050", f"{d['2050_temp']}°C")
-        st.metric("Hot Days Now", f"{d['2020_hot_days']} days/year")
-        st.metric("Projected Hot Days 2050", f"{d['2050_hot_days']} days/year")
+        st.metric("Avg temp in 2020", f"{d['2020_temp']}°C")
+        st.metric("Avg temp in 2050", f"{d['2050_temp']}°C")
+        st.metric("Hot days (+30 degrees celsius) now", f"{d['2020_hot_days']} days/year")
+        st.metric("Projected hot days 2050", f"{d['2050_hot_days']} days/year")
         st.markdown("**Top regional climate threats:**")
         for threat in d["top_threats"]:
             st.markdown(f"- {threat}")
 
     with st.container():
-        st.subheader("💼 Sector Risk")
+        st.subheader("💼 Sector risk")
         st.metric("Risk Level", f"{st.session_state.sector_risk}/10")
 
     with st.container():
-        st.subheader("🧠 Climate Anxiety Score")
+        st.subheader("🧠 Climate anxiety score")
         st.metric("Score", f"{st.session_state.anxiety_score}/100")
-        st.markdown("### Contributing Factors")
+        st.markdown("### Factors that contribute to your score:")
         st.markdown("""
         - 📍 **Region**: Local exposure to climate stress
         - 💼 **Sector**: Transition vulnerability
@@ -99,16 +99,16 @@ if "anxiety_score" in st.session_state:
         """)
 
     with st.container():
-        st.subheader("🌱 What You Can Do")
+        st.subheader("🌱 So... what can you do?")
         for rec in get_sector_actions(st.session_state.sector):
             st.markdown(f"- {rec}")
 
     with st.container():
-        st.subheader(f"📚 Resources in {st.session_state.location}")
+        st.subheader(f"📚 Please check out these resources in {st.session_state.location}")
         for r in get_local_resources(st.session_state.location):
             st.markdown(f"- {r}")
 
-    with st.expander("📘 Methodology"):
+    with st.expander("📘 The methodology"):
         st.markdown("""
         - Canadian climate data based on summaries from Climate Atlas and Environment Canada.
         - Anxiety score blends physical exposure, job risk, psychological resilience.
