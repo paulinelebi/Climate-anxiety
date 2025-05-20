@@ -26,35 +26,39 @@ def add_bg_audio(file_path):
 
 add_bg_audio("611610__djscreechingpossum__creepy-bioship-ambiance.mp3")
 
-# Custom background and theme
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
     html, body, [class*="css"] {
-        font-family: 'DM Sans', sans-serif;
-        background-image: linear-gradient(to bottom right, #fceabb, #f8b500);
-        color: #333333;
+        font-family: 'Playfair Display', serif;
     }
-    .stTextInput > div > input {
-        background-color: rgba(255,255,255,0.9);
-        color: #111111;
-        border-radius: 10px;
-        padding: 10px;
+
+    .main {
+        background: linear-gradient(to bottom, #ffeef4, #ffffff);
     }
-    .stSelectbox > div > div {
-        background-color: rgba(255,255,255,0.9);
-        border-radius: 10px;
-        color: #411111;
+
+    .block-container {
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     }
-    .stSlider > div {
-        color: #311111;
+
+    h1, h2, h3 {
+        color: #bf5f82;
     }
-    .stButton > button {
-        background-color: #2e7d32;
-        color: purple;
-        border-radius: 10px;
-        padding: 0.5em 1em;
-        font-weight: 600;
+
+    .stButton>button {
+        background-color: #f6c1d5;
+        color: black;
+        border-radius: 20px;
+        padding: 10px 24px;
+        font-size: 16px;
+    }
+
+    .stRadio>div>label {
+        color: #4c3b4d !important;
     }
     </style>
 """, unsafe_allow_html=True)
