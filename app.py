@@ -10,16 +10,45 @@ from modules.canada_climate_summary import get_provincial_climate_summary
 st.set_page_config(page_title="🌍 Do you have climate anxiety? The Climate Score Index: Find yours!", layout="wide")
 
 st.markdown("""
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Raleway:wght@300;600&display=swap" rel="stylesheet">
     <style>
-    .main { background-color: #f5f5f5; }
-    .block-container { padding: 2rem 2rem 2rem 2rem; }
-    h1, h2, h3 { color: #3b3b3b; }
+    html, body, h1, h2, h3, h4 {
+        font-family: 'Playfair Display', serif;
+        color: #2c3e50;
+    }
+    body {
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        background-attachment: fixed;
+    }
+    .main {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+        padding: 2rem;
+    }
+    .stTextInput input {
+        background-color: #fefefe;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 0.5rem;
+    }
+    .card {
+        background-color: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+    }
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown("<h1 style='text-align: center;'>🌿 Climate Anxiety Score</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; font-size: 18px;'>Understand your risks. Receive support. Take action.</p>", unsafe_allow_html=True)
-st.markdown("---")
+st.markdown("""
+    <h1 style='text-align: center;'>🌿 Climate Anxiety Companion</h1>
+    <p style='text-align: center; font-size: 18px;'>Understand your risks. Receive support. Take action.</p>
+    <blockquote style="font-style:italic; font-size: 1.1rem; color: #555;">
+        "In the depth of winter, I finally learned that within me there lay an invincible summer." – Albert Camus
+    </blockquote>
+    <hr>
+""", unsafe_allow_html=True)
 
 # --- Input Form ---
 name = st.text_input("🧍‍♀️ What’s your name?", value="Solenne")
