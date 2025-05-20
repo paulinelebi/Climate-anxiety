@@ -10,36 +10,48 @@ from modules.canada_climate_summary import get_provincial_climate_summary
 st.set_page_config(page_title="🌍 Do you have climate anxiety? The Climate Score Index: Find yours!", layout="wide")
 
 st.markdown("""
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Raleway:wght@300;600&display=swap" rel="stylesheet">
     <style>
-    html, body, h1, h2, h3, h4 {
-        font-family: 'Playfair Display', serif;
-        color: #2c3e50;
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap');
+    html, body, [class*="css"] {
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(to bottom right, #121212, #1e1e1e);
+        color: #f0f0f0;
     }
-    body {
-        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-        background-attachment: fixed;
+    .block-container {
+        padding: 2rem 2rem 2rem 2rem;
     }
-    .main {
-        background-color: rgba(255, 255, 255, 0.9);
-        border-radius: 12px;
-        padding: 2rem;
+    h1, h2, h3 {
+        color: #f4f4f4;
+        font-weight: 600;
     }
-    .stTextInput input {
-        background-color: #fefefe;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 0.5rem;
+    .stTextInput > div > div > input {
+        background-color: #2a2a2a;
+        color: #ffffff;
+        border: 1px solid #444;
+        border-radius: 8px;
     }
-    .card {
-        background-color: white;
-        border-radius: 10px;
-        padding: 1.5rem;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        margin-bottom: 2rem;
+    .stSelectbox > div > div > div > div {
+        background-color: #2a2a2a;
+        color: #ffffff;
+        border: 1px solid #444;
+        border-radius: 8px;
+    }
+    .stSlider > div {
+        color: #ffffff;
+    }
+    .stRadio > div {
+        color: #ffffff;
     }
     </style>
 """, unsafe_allow_html=True)
+
+st.markdown("""
+<h1 style='text-align: center;'>🌿 Climate Anxiety Companion</h1>
+<p style='text-align: center; font-size: 18px;'>Understand your risks. Receive support. Take action.</p>
+<p style='text-align: center; font-style: italic; color: #aaa;'>"In the depth of winter, I finally learned that within me there lay an invincible summer." – Albert Camus</p>
+""", unsafe_allow_html=True)
+
+st.markdown("---")
 
 st.markdown("""
     <h1 style='text-align: center;'>🌿 Climate Anxiety Companion</h1>
