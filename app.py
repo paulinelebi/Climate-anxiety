@@ -9,6 +9,23 @@ from modules.canada_climate_summary import get_provincial_climate_summary
 
 st.set_page_config(page_title="🌍 Do you have climate anxiety? The Climate Score Index: Find yours!", layout="wide")
 
+import base64
+
+def add_bg_audio(file_path):
+    with open(file_path, "rb") as f:
+        data = f.read()
+        b64 = base64.b64encode(data).decode()
+        st.markdown(
+            f"""
+            <audio autoplay loop>
+                <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
+            </audio>
+            """,
+            unsafe_allow_html=True
+        )
+
+add_bg_audio("611610__djscreechingpossum__creepy-bioship-ambiance.mp3")
+
 # Custom background and theme
 st.markdown("""
     <style>
