@@ -9,54 +9,43 @@ from modules.canada_climate_summary import get_provincial_climate_summary
 
 st.set_page_config(page_title="🌍 Do you have climate anxiety? The Climate Score Index: Find yours!", layout="wide")
 
+# Custom background and theme
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
     html, body, [class*="css"] {
         font-family: 'Inter', sans-serif;
-        background: linear-gradient(to bottom right, #121212, #1e1e1e);
-        color: #f0f0f0;
+        background-image: linear-gradient(to bottom right, #fceabb, #f8b500);
+        color: #333333;
     }
-    .block-container {
-        padding: 2rem 2rem 2rem 2rem;
+    .stTextInput > div > input {
+        background-color: rgba(255,255,255,0.9);
+        color: #111111;
+        border-radius: 10px;
+        padding: 10px;
     }
-    h1, h2, h3 {
-        color: #f4f4f4;
-        font-weight: 600;
-    }
-    .stTextInput > div > div > input {
-        background-color: #2a2a2a;
-        color: #ffffff;
-        border: 1px solid #444;
-        border-radius: 8px;
-    }
-    .stSelectbox > div > div > div > div {
-        background-color: #2a2a2a;
-        color: #ffffff;
-        border: 1px solid #444;
-        border-radius: 8px;
+    .stSelectbox > div > div {
+        background-color: rgba(255,255,255,0.9);
+        border-radius: 10px;
+        color: #111111;
     }
     .stSlider > div {
-        color: #ffffff;
+        color: #111111;
     }
-    .stRadio > div {
-        color: #ffffff;
+    .stButton > button {
+        background-color: #2e7d32;
+        color: white;
+        border-radius: 10px;
+        padding: 0.5em 1em;
+        font-weight: 600;
     }
     </style>
 """, unsafe_allow_html=True)
 
 st.markdown("""
-<h1 style='text-align: center;'>🌿 Climate Anxiety Companion</h1>
-<p style='text-align: center; font-size: 18px;'>Understand your risks. Receive support. Take action.</p>
-<p style='text-align: center; font-style: italic; color: #aaa;'>"In the depth of winter, I finally learned that within me there lay an invincible summer." – Albert Camus</p>
-""", unsafe_allow_html=True)
-
-st.markdown("---")
-
-st.markdown("""
-    <h1 style='text-align: center;'>🌿 Climate Anxiety Companion</h1>
-    <p style='text-align: center; font-size: 18px;'>Understand your risks. Receive support. Take action.</p>
-    <blockquote style="font-style:italic; font-size: 1.1rem; color: #555;">
+    <h1 style='text-align: center; font-size: 48px;'> Climate Anxiety Score</h1>
+    <p style='text-align: center; font-size: 20px;'>Understand your risks. Receive support. Take action.</p>
+    <blockquote style='text-align: center; font-style: italic; color: #444;'>
         "In the depth of winter, I finally learned that within me there lay an invincible summer." – Albert Camus
     </blockquote>
     <hr>
