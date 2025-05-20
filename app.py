@@ -2,7 +2,6 @@ import streamlit as st
 from modules.climate_data import get_climate_trend
 from modules.economic_risk import get_sector_risk
 from modules.anxiety_model import calculate_anxiety_score
-from modules.gpt_summary import generate_therapeutic_summary
 from modules.visuals import plot_temperature_trend, show_climate_map
 from modules.sector_actions import get_sector_actions
 from modules.location_profiles import get_canadian_provinces, get_regional_questions, get_local_resources
