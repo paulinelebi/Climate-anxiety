@@ -7,7 +7,7 @@ from modules.sector_actions import get_sector_actions
 from modules.location_profiles import get_canadian_provinces, get_regional_questions, get_local_resources
 from modules.canada_climate_summary import get_provincial_climate_summary
 
-st.set_page_config(page_title="🌍 Climate Anxiety Companion", layout="wide")
+st.set_page_config(page_title="🌍 Do you have climate anxiety? The Climate Score Index: Find yours!", layout="wide")
 
 st.markdown("""
     <style>
@@ -17,36 +17,39 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown("<h1 style='text-align: center;'>🌿 Climate Anxiety Companion</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>🌿 Climate Anxiety Score</h1>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; font-size: 18px;'>Understand your risks. Receive support. Take action.</p>", unsafe_allow_html=True)
 st.markdown("---")
 
 # --- Input Form ---
-with st.form("user_input_form"):
-    col1, col2 = st.columns(2)
-    with col1:
-        name = st.text_input("🧍‍♀️ What’s your name?", value="Solenne")
-        age = st.slider("📆 Your age", 15, 80, 25)
-        location = st.selectbox("🌎 Where in Canada do you live?", get_canadian_provinces())
-        sector = st.selectbox("💼 Your work or study area", [
-            "Energy", "Education", "Healthcare", "Finance", "Climate Research",
-            "Technology", "Manufacturing", "Tourism", "Agriculture", "Not working", "Student"])
-    with col2:
-        stress = st.slider("📊 Daily stress level", 1, 10, 5)
-        support = st.slider("👥 Community support feeling", 1, 10, 5)
-        financial_security = st.slider("💸 Financial security feeling", 1, 10, 5)
-        future_agency = st.slider("🕊️ Control over your future", 1, 10, 5)
+name = st.text_input("🧍‍♀️ What’s your name?", value="Solenne")
+age = st.slider("📆 Your age", 15, 80, 25)
+location = st.selectbox("🌎 Where in Canada do you live?", get_canadian_provinces())
+sector = st.selectbox("💼 Your work or study area", [
+    "Energy", "Education", "Healthcare", "Finance", "Climate Research",
+    "Technology", "Manufacturing", "Tourism", "Agriculture", "Not working", "Student"])
 
-    climate_news = st.select_slider("📰 How often do you follow climate news?", options=["Never", "Sometimes", "Daily", "Constantly"])
-    has_experienced_disaster = st.radio("🌪️ Experienced a climate disaster?", ["Yes", "No"])
+stress = st.slider("📊 Daily stress level", 1, 10, 5)
+support = st.slider("👥 Community support feeling", 1, 10, 5)
+financial_security = st.slider("💸 Financial security feeling", 1, 10, 5)
+future_agency = st.slider("🕊️ Control over your future", 1, 10, 5)
 
-    custom_questions = get_regional_questions(location)
-    st.markdown("### 🌍 Regional Questions")
-    responses = [st.radio(q, ["Yes", "No"]) for q in custom_questions]
+climate_news = st.select_slider("📰 How often do you follow climate news?", options=["Never", "Sometimes", "Daily", "Constantly"])
+has_experienced_disaster = st.radio("🌪️ Experienced a climate disaster?", ["Yes", "No"])
 
-    submitted = st.form_submit_button("✨ Analyze My Profile")
+custom_questions = get_regional_questions(location)
+st.markdown("### 🌍 Regional Questions")
+responses = [st.radio(q, ["Yes", "No"]) for q in custom_questions]
 
-if submitted:
+if st.button("✨ Analyze My Profile"):
+    region = location.split(" - ")[0]
+    summary_data = get_provincial_climate_summary(location)
+    sector_risk = get_sector_risk(sector)
+    anxiety_score = calculate_anxiety_score(
+        age, region, sector_risk, stress, climate_news,
+        has_experienced_disaster, support, financial_security, future_agency
+    )
+
     st.session_state.update({
         "name": name,
         "age": age,
@@ -58,18 +61,7 @@ if submitted:
         "future_agency": future_agency,
         "climate_news": climate_news,
         "has_experienced_disaster": has_experienced_disaster,
-        "responses": responses
-    })
-
-    region = location.split(" - ")[0]
-    summary_data = get_provincial_climate_summary(location)
-    sector_risk = get_sector_risk(sector)
-    anxiety_score = calculate_anxiety_score(
-        age, region, sector_risk, stress, climate_news,
-        has_experienced_disaster, support, financial_security, future_agency
-    )
-
-    st.session_state.update({
+        "responses": responses,
         "region": region,
         "sector_risk": sector_risk,
         "anxiety_score": anxiety_score,
@@ -111,7 +103,6 @@ if "anxiety_score" in st.session_state:
         for rec in get_sector_actions(st.session_state.sector):
             st.markdown(f"- {rec}")
 
-
     with st.container():
         st.subheader(f"📚 Resources in {st.session_state.location}")
         for r in get_local_resources(st.session_state.location):
@@ -122,5 +113,4 @@ if "anxiety_score" in st.session_state:
         - Canadian climate data based on summaries from Climate Atlas and Environment Canada.
         - Anxiety score blends physical exposure, job risk, psychological resilience.
         - Resources are curated per province to support literacy, planning, and community action.
-        - All reflections are auto-generated using internal logic to support emotional awareness.
         """)
