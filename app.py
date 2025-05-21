@@ -158,8 +158,6 @@ if "anxiety_score" in st.session_state:
         – Edmund Burke
         """)
 
-    st.markdown("## Compare regional risk")
-    show_click_to_compare_map()
 
     st.markdown(f"### Please feel free to check out these resources in {st.session_state.location}")
     for r in get_local_resources(st.session_state.location):
@@ -167,25 +165,28 @@ if "anxiety_score" in st.session_state:
 
     with st.expander("The methodology"):
         st.markdown("""
-### Data sources
-- **Climate projections** are sourced from [Climate Atlas of Canada](https://climateatlas.ca) and [Environment and Climate Change Canada](https://www.canada.ca/en/environment-climate-change.html), using regional emissions pathways and heat projections up to 2050.
-- **Sectoral risk** is derived from transition vulnerability models used by financial institutions and global ESG indices, with weights adapted to Canada's economic sectors.
-- **Anxiety score logic** draws on validated psychological models of eco-anxiety, including work by Dr. Susan Clayton (Wooster College) and the APA Climate Psychology Task Force.
+        ### Data sources
+        - **Climate projections** are sourced from [Climate Atlas of Canada](https://climateatlas.ca) and [Environment and Climate Change Canada](https://www.canada.ca/en/environment-climate-change.html), using regional emissions pathways and heat projections up to 2050.
+        - **Sectoral risk** is derived from transition vulnerability models used by financial institutions and global ESG indices, with weights adapted to Canada's economic sectors.
+        - **Anxiety score logic** draws on validated psychological models of eco-anxiety, including work by Dr. Susan Clayton (Wooster College) and the APA Climate Psychology Task Force.
+        
+        ### Score calculation
+        Your vulnerability score is based on a model that takes into account three dimensions:
+        1. **Physical climate exposure** – based on where you live, how many hot days are projected, and extreme weather history.
+        2. **Economic transition risk** – based on which sector you work/study in, and how exposed that sector is to decarbonization policies.
+        3. **Resilience & wellbeing** – age, support networks, financial security, sense of control, and news exposure are combined to reflect your personal buffering capacity.
+        
+        ### Limitations
+        - Regional questions are qualitative and not yet integrated into scoring (v2 may include this).
+        - Climate impact severity is assumed uniform within regions; local variability is not yet modeled.
+        - Scores are for reflection only – this is not a diagnostic tool.
+        
+        ### Intended Use
+        This simulator is a **mental health companion** – not a prediction engine. It's designed to help users:
+        - Understand how different forms of climate vulnerability interact
+        - Reflect on emotional and structural dimensions of eco-anxiety
+        - Connect with relevant resources and support actions
+                """)
 
-### Score calculation
-Your vulnerability score is based on a model that takes into account three dimensions:
-1. **Physical climate exposure** – based on where you live, how many hot days are projected, and extreme weather history.
-2. **Economic transition risk** – based on which sector you work/study in, and how exposed that sector is to decarbonization policies.
-3. **Resilience & wellbeing** – age, support networks, financial security, sense of control, and news exposure are combined to reflect your personal buffering capacity.
-
-### Limitations
-- Regional questions are qualitative and not yet integrated into scoring (v2 may include this).
-- Climate impact severity is assumed uniform within regions; local variability is not yet modeled.
-- Scores are for reflection only – this is not a diagnostic tool.
-
-### Intended Use
-This simulator is a **mental health companion** – not a prediction engine. It's designed to help users:
-- Understand how different forms of climate vulnerability interact
-- Reflect on emotional and structural dimensions of eco-anxiety
-- Connect with relevant resources and support actions
-        """)
+    st.markdown("## Compare regional risk")
+    show_click_to_compare_map()
