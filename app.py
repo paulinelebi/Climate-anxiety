@@ -7,10 +7,11 @@ from modules.sector_actions import get_sector_actions
 from modules.location_profiles import get_canadian_provinces, get_regional_questions, get_local_resources
 from modules.canada_climate_summary import get_provincial_climate_summary
 
-st.set_page_config(page_title="🌍 Climate vulnerability score", layout="wide")
-
 import base64
 
+st.set_page_config(page_title="🌍 Climate Anxiety Score", layout="wide")
+
+# Load background audio
 def add_bg_audio(file_path):
     with open(file_path, "rb") as f:
         data = f.read()
@@ -26,23 +27,21 @@ def add_bg_audio(file_path):
 
 add_bg_audio("611610__djscreechingpossum__creepy-bioship-ambiance.mp3")
 
+# Apply custom styling
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
     html, body, [class*="css"] {
         font-family: 'Playfair Display', serif;
-    }
-
-    .main {
-        background: linear-gradient(to bottom, #ffeef4, #ffffff);
+        background: linear-gradient(to bottom, #ffeef4, #fdf7fa);
     }
 
     .block-container {
+        background: rgba(255, 255, 255, 0.75);
         padding: 2rem;
-        background: rgba(255, 255, 255, 0.7);
-        border-radius: 20px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        border-radius: 18px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     }
 
     h1, h2, h3 {
@@ -53,26 +52,33 @@ st.markdown("""
         background-color: #f6c1d5;
         color: black;
         border-radius: 20px;
-        padding: 10px 24px;
+        padding: 10px 20px;
         font-size: 16px;
+        border: none;
     }
 
-    .stRadio>div>label {
-        color: #4c3b4d !important;
+    .fade-in {
+        animation: fadeIn 1.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity: 1;}
     }
     </style>
 """, unsafe_allow_html=True)
 
+# Header and quote
 st.markdown("""
-    <h1 style='text-align: center; font-size: 48px;'> Climate Vulnerability Score</h1>
+    <h1 style='text-align: center;'>🌿 Climate Anxiety Score</h1>
     <p style='text-align: center; font-size: 20px;'>Understand your risks. Receive support. Take action.</p>
-    <blockquote style='text-align: center; font-style: italic; color: #644;'>
+    <blockquote style='text-align: center; font-style: italic; color: #7a4b54;'>
         "In the depth of winter, I finally learned that within me there lay an invincible summer." – Albert Camus
     </blockquote>
     <hr>
 """, unsafe_allow_html=True)
 
-# --- Input Form ---
+# Input form
 name = st.text_input("🧍‍♀️ What’s your name?", value="Solenne")
 age = st.slider("📆 Your age", 15, 80, 25)
 location = st.selectbox("🌎 Where in Canada do you live?", get_canadian_provinces())
@@ -92,7 +98,8 @@ custom_questions = get_regional_questions(location)
 st.markdown("### 🌍 Regional Questions")
 responses = [st.radio(q, ["Yes", "No"]) for q in custom_questions]
 
-if st.button("Ready to see your score? Click here"):
+# Submit button
+if st.button("✨ Analyze My Profile"):
     region = location.split(" - ")[0]
     summary_data = get_provincial_climate_summary(location)
     sector_risk = get_sector_risk(sector)
@@ -119,49 +126,41 @@ if st.button("Ready to see your score? Click here"):
         "summary_data": summary_data
     })
 
+# Results section
 if "anxiety_score" in st.session_state:
-    st.markdown("## 📈 Your results")
+    st.markdown('<div class="fade-in">', unsafe_allow_html=True)
 
-    with st.container():
-        st.subheader("🌡️ Local climate outlook")
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.subheader("🌡️ Climate Outlook")
         d = st.session_state.summary_data
-        st.metric("Avg temp in 2020", f"{d['2020_temp']}°C")
-        st.metric("Avg temp in 2050", f"{d['2050_temp']}°C")
-        st.metric("Hot days (+30 degrees celsius) now", f"{d['2020_hot_days']} days/year")
-        st.metric("Projected hot days 2050", f"{d['2050_hot_days']} days/year")
-        st.markdown("**Top regional climate threats:**")
-        for threat in d["top_threats"]:
-            st.markdown(f"- {threat}")
+        st.metric("2020 Avg Temp", f"{d['2020_temp']}°C")
+        st.metric("2050 Avg Temp", f"{d['2050_temp']}°C")
+        st.metric("Hot Days Now", f"{d['2020_hot_days']} days/yr")
+        st.metric("Hot Days in 2050", f"{d['2050_hot_days']} days/yr")
 
-    with st.container():
-        st.subheader("💼 Sector risk")
+    with col2:
+        st.subheader("💼 Sector Risk")
         st.metric("Risk Level", f"{st.session_state.sector_risk}/10")
-
-    with st.container():
-        st.subheader("🧠 Climate anxiety score")
+        st.subheader("🧠 Climate Anxiety")
         st.metric("Score", f"{st.session_state.anxiety_score}/100")
-        st.markdown("### Factors that contribute to your score:")
-        st.markdown("""
-        - 📍 **Region**: Local exposure to climate stress
-        - 💼 **Sector**: Transition vulnerability
-        - 🧑 **Age**: Future horizon
-        - 📰 **News exposure**, 🌪️ **Disaster history**
-        - 👥 **Support**, 💸 **Security**, 🕊️ **Agency**
-        """)
 
-    with st.container():
-        st.subheader("🌱 So... what can you do?")
+    with col3:
+        st.subheader("🌱 What You Can Do")
         for rec in get_sector_actions(st.session_state.sector):
             st.markdown(f"- {rec}")
 
-    with st.container():
-        st.subheader(f"📚 Please check out these resources in {st.session_state.location}")
-        for r in get_local_resources(st.session_state.location):
-            st.markdown(f"- {r}")
+    st.markdown("### 📚 Resources in your region")
+    for r in get_local_resources(st.session_state.location):
+        st.markdown(f"- {r}")
 
-    with st.expander("📘 The methodology"):
+    with st.expander("📘 Methodology"):
         st.markdown("""
-        - Canadian climate data based on summaries from Climate Atlas and Environment Canada.
-        - Anxiety score blends physical exposure, job risk, psychological resilience.
-        - Resources are curated per province to support literacy, planning, and community action.
+        - Canadian climate data from Climate Atlas & Environment Canada.
+        - Risk is a combination of physical exposure, sector sensitivity, and personal resilience.
+        - Resources curated by province to support adaptation and wellbeing.
         """)
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
