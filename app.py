@@ -13,55 +13,49 @@ st.set_page_config(page_title="Climate Vulnerability Score", layout="wide")
 
 # setting the font, background video, style
 st.markdown("""
-    <link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <style>
-    html, body, .stApp, .block-container, div, span, p, h1, h2, h3 {
-        font-family: 'Quantico', sans-serif !important;
-        color: #2f2f2f;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+html, body, .stApp, .block-container, div, span, p, h1, h2, h3 {
+    font-family: 'Quantico', sans-serif !important;
+    color: #2f2f2f;
+}
+.stApp {
+    background: transparent;
+}
+video.bgvid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    z-index: -1;
+    opacity: 0.2;
+    object-fit: cover;
+}
+.block-container {
+    background-color: rgba(255, 255, 255, 0.75);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+h1, h2, h3 {
+    color: #b84d72;
+}
+.stButton>button {
+    background-color: #ffcad4;
+    color: #3e3e3e;
+    border-radius: 25px;
+    padding: 0.75rem 1.5rem;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+}
+</style>
 
-    .stApp {
-        background: transparent;
-    }
-
-    video.bgvid {
-        position: fixed;
-        top: 0;
-        left: 0;
-        min-width: 100vw;
-        min-height: 100vh;
-        z-index: -1;
-        opacity: 0.2;
-        object-fit: cover;
-    }
-
-    .block-container {
-        background-color: rgba(255, 255, 255, 0.75);
-        padding: 2rem;
-        border-radius: 1rem;
-        box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    }
-
-    h1, h2, h3 {
-        color: #b84d72;
-    }
-
-    .stButton>button {
-        background-color: #ffcad4;
-        color: #3e3e3e;
-        border-radius: 25px;
-        padding: 0.75rem 1.5rem;
-        font-weight: bold;
-        font-size: 16px;
-        border: none;
-    }
-    </style>
-
-    <video class="bgvid" autoplay muted loop playsinline>
-        <source src="https://cdn.coverr.co/videos/coverr-fishing-in-the-middle-of-the-ocean-uvjzrocvkb/1080p.mp4" type="video/mp4">
-    </video>
+<video class="bgvid" autoplay muted loop playsinline>
+    <source src="https://cdn.coverr.co/videos/coverr-fishing-in-the-middle-of-the-ocean-uvjzrocvkb/1080p.mp4" type="video/mp4">
+</video>
 """, unsafe_allow_html=True)
-
 
 # ambient audio to set the mood
 def add_bg_audio(file_path):
@@ -147,11 +141,8 @@ if "anxiety_score" in st.session_state:
         for t in d["top_threats"]:
             st.markdown(f"- {t}")
 
-    st.markdown("### Wondering what you can do? Try:")
-    for rec in get_sector_actions(st.session_state.sector):
-        st.markdown(f"- {rec}")
-
-  st.markdown("""#### and, consider these other actions for climate and mental wellbeing:
+    st.markdown("""
+#### and, consider these other actions for climate and mental wellbeing:
 
 - **Join a local climate group** (e.g. Climate Reality Project, Fridays for Future)
 - **Talk to others**: climate anxiety gets worse in isolation. Invite conversation with your family, friends or others.
@@ -161,17 +152,17 @@ if "anxiety_score" in st.session_state:
 - **Support adaptation efforts**: donate to organizations building resilience in at-risk areas.
 - **Push institutions**: ask your university, workplace, or pension fund what their net-zero plan is.
 - **Start small**: grow herbs, cut a flight or subsidize those emissions, reuse more - behavioural shifts can help you to reduce feelings of helplessness.
+
 *"Nobody made a greater mistake than he who did nothing because he could only do a little."*  
 – Edmund Burke
 """)
-
 
     st.markdown(f"### Please feel free to check out these resources in {st.session_state.location}")
     for r in get_local_resources(st.session_state.location):
         st.markdown(f"- {r}")
 
-   with st.expander("📘 The methodology"):
-    st.markdown("""
+    with st.expander("📘 The methodology"):
+        st.markdown("""
 ### Data sources
 - **Climate projections** are sourced from [Climate Atlas of Canada](https://climateatlas.ca) and [Environment and Climate Change Canada](https://www.canada.ca/en/environment-climate-change.html), using regional emissions pathways and heat projections up to 2050.
 - **Sectoral risk** is derived from transition vulnerability models used by financial institutions and global ESG indices, with weights adapted to Canada's economic sectors.
@@ -179,19 +170,18 @@ if "anxiety_score" in st.session_state:
 
 ### Score calculation
 Your vulnerability score is based on a model that takes into account three dimensions:
-1. **Physical climate exposure** - based on where you live, how many hot days are projected, and extreme weather history.
-2. **Economic transition risk** - based on which sector you work/study in, and how exposed that sector is to decarbonization policies.
-3. **Resilience & wellbeing** - age, support networks, financial security, sense of control, and news exposure are combined to reflect your personal buffering capacity.
+1. **Physical climate exposure** – based on where you live, how many hot days are projected, and extreme weather history.
+2. **Economic transition risk** – based on which sector you work/study in, and how exposed that sector is to decarbonization policies.
+3. **Resilience & wellbeing** – age, support networks, financial security, sense of control, and news exposure are combined to reflect your personal buffering capacity.
 
 ### Limitations
 - Regional questions are qualitative and not yet integrated into scoring (v2 may include this).
 - Climate impact severity is assumed uniform within regions; local variability is not yet modeled.
-- Scores are for reflection only - this is not a diagnostic tool.
+- Scores are for reflection only – this is not a diagnostic tool.
 
 ### Intended Use
-This simulator is a **mental health companion** - not a prediction engine. It's designed to help users:
+This simulator is a **mental health companion** – not a prediction engine. It's designed to help users:
 - Understand how different forms of climate vulnerability interact
 - Reflect on emotional and structural dimensions of eco-anxiety
 - Connect with relevant resources and support actions
-    """)
-
+        """)
