@@ -11,7 +11,7 @@ from modules.canada_climate_summary import get_provincial_climate_summary
 
 st.set_page_config(page_title="🌍 Climate Vulnerability Score", layout="wide")
 
-# --- Background video: Earth in space (from Coverr) ---
+# background video: earth in space 
 st.markdown("""
     <style>
     .stApp {
@@ -33,7 +33,7 @@ st.markdown("""
     </video>
 """, unsafe_allow_html=True)
 
-# --- Optional ambient audio ---
+# ambient audio to set the mood
 def add_bg_audio(file_path):
     with open(file_path, "rb") as f:
         data = f.read()
@@ -46,7 +46,7 @@ def add_bg_audio(file_path):
 
 add_bg_audio("611610__djscreechingpossum__creepy-bioship-ambiance.mp3")
 
-# --- Styling ---
+# styling 
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
@@ -79,7 +79,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# --- Header ---
+# header
 st.markdown("""
 <h1 style='text-align: center;'>🌿 Climate Vulnerability Score</h1>
 <p style='text-align: center; font-size: 20px;'>Understand your risks. Receive support. Take action.</p>
@@ -88,7 +88,7 @@ st.markdown("""
 </blockquote>
 """, unsafe_allow_html=True)
 
-# --- Input form ---
+# input form for users
 name = st.text_input("🧍‍♀️ What’s your name?", value="Solenne")
 age = st.slider("📆 Your age", 15, 80, 25)
 location = st.selectbox("🌎 Where in Canada do you live?", get_canadian_provinces())
@@ -106,8 +106,8 @@ has_experienced_disaster = st.radio("🌪️ Experienced a climate disaster?", [
 st.markdown("### 🌍 Regional Questions")
 responses = [st.radio(q, ["Yes", "No"]) for q in get_regional_questions(location)]
 
-# --- Process ---
-if st.button("✨ Analyze My Score"):
+# button and score generator
+if st.button(" Analyse my score"):
     region = location.split(" - ")[0]
     summary_data = get_provincial_climate_summary(location)
     sector_risk = get_sector_risk(sector)
@@ -125,7 +125,7 @@ if st.button("✨ Analyze My Score"):
         "anxiety_score": anxiety_score, "summary_data": summary_data
     })
 
-# --- Results ---
+# results
 if "anxiety_score" in st.session_state:
     st.markdown("## 📈 Your Results")
     d = st.session_state.summary_data
