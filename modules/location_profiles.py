@@ -1,12 +1,8 @@
 
+from modules.canada_climate_summary import climate_data_dict
+
 def get_canadian_provinces():
-    return [
-        "Alberta - Calgary", "Alberta - Edmonton", "British Columbia - Vancouver", "British Columbia - Interior",
-        "Manitoba - Winnipeg", "New Brunswick", "Newfoundland and Labrador",
-        "Nova Scotia - Halifax", "Ontario - Toronto", "Ontario - Ottawa", "Ontario - North",
-        "Prince Edward Island", "Quebec - Montreal", "Quebec - Quebec City", "Saskatchewan - Regina",
-        "Saskatchewan - Saskatoon", "Northern Territories"
-    ]
+    return list(climate_data_dict.keys())
 
 def get_regional_questions(location):
     if "British Columbia" in location:
