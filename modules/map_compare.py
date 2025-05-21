@@ -85,7 +85,10 @@ def show_click_to_compare_map():
             fill_opacity=0.8
         ).add_to(m)
 
-    # Display the map with full-width and no white space
-    st.markdown("---")
-    st_folium(m, height=520, use_container_width=True)
+        # Display the map inside a tight container to avoid layout spill
+    with st.container():
+        st.markdown("---")
+        st_folium(m, height=520, use_container_width=True)
+        st.markdown("")  # tiny buffer to avoid visual cramping
+
 
