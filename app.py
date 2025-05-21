@@ -123,7 +123,7 @@ if st.button(" Analyse my score"):
 
 # results
 if "anxiety_score" in st.session_state:
-    st.markdown("##...your climate vulnerability score is:")
+    st.markdown("...your climate vulnerability score is:")
     d = st.session_state.summary_data
 
     col1, col2, col3 = st.columns(3)
