@@ -53,7 +53,7 @@ h1, h2, h3 {
 </style>
 
 <video class="bgvid" autoplay muted loop playsinline>
-    <source src="https://cdn.coverr.co/videos/coverr-fishing-in-the-middle-of-the-ocean-uvjzrocvkb/1080p.mp4" type="video/mp4">
+    <source src="https://raw.githubusercontent.com/paulinelebi/Climate-anxiety/main/6522160-sd_540_960_24fps.mp4" type="video/mp4">
 </video>
 """, unsafe_allow_html=True)
 
