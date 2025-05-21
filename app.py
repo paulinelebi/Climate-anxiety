@@ -161,7 +161,7 @@ if "anxiety_score" in st.session_state:
     for r in get_local_resources(st.session_state.location):
         st.markdown(f"- {r}")
 
-    with st.expander("📘 The methodology"):
+    with st.expander("The methodology"):
         st.markdown("""
 ### Data sources
 - **Climate projections** are sourced from [Climate Atlas of Canada](https://climateatlas.ca) and [Environment and Climate Change Canada](https://www.canada.ca/en/environment-climate-change.html), using regional emissions pathways and heat projections up to 2050.
