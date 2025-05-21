@@ -120,4 +120,4 @@ def get_provincial_climate_summary(location):
             "2020_hot_days": 0,
             "2050_hot_days": 2,
             "top_threats": ["Permafrost thaw", "Ecosystem shifts", "Arctic fires"]
-        }
+        }}
