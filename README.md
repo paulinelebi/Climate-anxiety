@@ -1,6 +1,6 @@
 Climate Vulnerability/Anxiety Simulator
 
-This project is a web app that helps people in Canada understand how climate change might affect their local area—and how that connects to feelings of anxiety or uncertainty about the future. 
+This project is a web app that helps people in Canada understand how climate change might affect their local area - and how that connects to feelings of anxiety or uncertainty about the future. 
 It’s built around real climate projections (like temperature rise and extreme heat days), plus some reflective questions that generate a “climate anxiety score.” 
 Based on that, the app shows relevant risks, local data, and ways to take action.
 
