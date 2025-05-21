@@ -48,14 +48,13 @@ add_bg_audio("611610__djscreechingpossum__creepy-bioship-ambiance.mp3")
 
 # styling 
 st.markdown("""
+    <link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet');
-
-    html, body, [class*="css"] {
-        font-family: 'Quantico', sans-serif;
-        color: #2f2f2f;
+    html, body, .stApp, .block-container, .css-1v0mbdj, .css-1d391kg {
+    font-family: 'Quantico', sans-serif !important;
+    color: #2f2f2f;
     }
-
+   
     .block-container {
         background-color: rgba(255, 255, 255, 0.75);
         padding: 2rem;
