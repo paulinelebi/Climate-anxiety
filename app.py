@@ -49,10 +49,10 @@ add_bg_audio("611610__djscreechingpossum__creepy-bioship-ambiance.mp3")
 # styling 
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet');
 
     html, body, [class*="css"] {
-        font-family: 'Playfair Display', serif;
+        font-family: 'Quantico', sans-serif;
         color: #2f2f2f;
     }
 
@@ -81,7 +81,7 @@ st.markdown("""
 
 # header
 st.markdown("""
-<h1 style='text-align: center;'>🌿 Climate Vulnerability Score</h1>
+<h1 style='text-align: center;'> Climate Vulnerability Score</h1>
 <p style='text-align: center; font-size: 20px;'>Understand your risks. Receive support. Take action.</p>
 <blockquote style='text-align: center; font-style: italic; color: #5c4a55;'>
     “In the depth of winter, I finally learned that within me there lay an invincible summer.” – Albert Camus
