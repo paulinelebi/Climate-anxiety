@@ -133,7 +133,7 @@ if "anxiety_score" in st.session_state:
     with col2:
         st.subheader("Sector risk")
         st.metric("Risk level", f"{st.session_state.sector_risk}/10")
-        st.subheader("Anxiety score")
+        st.subheader("Your likely climate anxiety level:")
         st.metric("Score", f"{st.session_state.anxiety_score}/100")
 
     with col3:
@@ -142,7 +142,7 @@ if "anxiety_score" in st.session_state:
             st.markdown(f"- {t}")
 
     st.markdown("""
-#### and, consider these other actions for climate and mental wellbeing:
+#### Consider these actions for your climate and mental wellbeing:
 
 - **Join a local climate group** (e.g. Climate Reality Project, Fridays for Future)
 - **Talk to others**: climate anxiety gets worse in isolation. Invite conversation with your family, friends or others.
