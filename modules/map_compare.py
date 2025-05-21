@@ -1,11 +1,9 @@
-# modules/map_compare.py
-
 import streamlit as st
 import folium
 from streamlit_folium import st_folium
 
 def show_click_to_compare_map():
-    # Coordinates for each province
+    # Province center coordinates
     province_coords = {
         "British Columbia": [53.7267, -127.6476],
         "Alberta": [53.9333, -116.5765],
@@ -20,7 +18,7 @@ def show_click_to_compare_map():
         "Northern Territories": [64.8255, -124.8457]
     }
 
-    # Climate risk scores out of 10
+    # Climate risk scores (out of 10)
     climate_risks = {
         "British Columbia": 8.5,
         "Alberta": 7.2,
@@ -32,16 +30,24 @@ def show_click_to_compare_map():
         "Nova Scotia": 5.4,
         "Prince Edward Island": 5.0,
         "Newfoundland and Labrador": 4.8,
-        "Northern Territories": 7.8
+        "Northern Territories": 7.8,
     }
 
+    # Calculate national average
     national_avg = round(sum(climate_risks.values()) / len(climate_risks), 1)
 
-    st.markdown("### Climate Risk Across Canada")
-    st.markdown("Click a province to compare its projected 2050 climate risk to the national average.")
+    # Get user's selected province from session state
+    user_location = st.session_state.get("location", "")
+    user_province = user_location.split(" - ")[0] if " - " in user_location else user_location
 
-    m = folium.Map(location=[56, -96], zoom_start=4, tiles='cartodbpositron')
+    # Header
+    st.markdown("### 🗺️ Climate Risk Across Canada")
+    st.markdown("Click a province to compare its projected 2050 risk to the national average.")
 
+    # Initialize folium map
+    m = folium.Map(location=[56, -96], zoom_start=4, tiles="cartodbpositron")
+
+    # Add each province as a circle marker
     for province, coords in province_coords.items():
         risk = climate_risks.get(province, "N/A")
         comparison = (
@@ -49,16 +55,37 @@ def show_click_to_compare_map():
             "below average" if risk < national_avg else
             "equal to the national average"
         )
-        popup = f"{province}<br>Risk Score: {risk}/10<br>This is {comparison} (National Avg: {national_avg})"
+        popup_html = f"""
+        <div style="font-family: sans-serif; font-size: 14px;">
+            <b>{province}</b><br>
+            Risk Score: <b>{risk}/10</b><br>
+            This is <i>{comparison}</i><br>
+            (National Avg: {national_avg})
+        </div>
+        """
+
+        # Highlight user's province
+        is_user = user_province.strip().lower() == province.lower()
+        color = (
+            "darkred" if risk >= 8 else
+            "orange" if risk >= 6 else
+            "lightgreen"
+        )
+        radius = 11 if is_user else 7
+        border_color = "black" if is_user else color
 
         folium.CircleMarker(
             location=coords,
-            radius=9,
-            popup=popup,
-            tooltip=province,
-            color='red' if risk > national_avg else 'green',
+            radius=radius,
+            popup=folium.Popup(popup_html, max_width=250),
+            tooltip=f"{province} (You)" if is_user else province,
+            color=border_color,
             fill=True,
-            fill_opacity=0.6
+            fill_color=color,
+            fill_opacity=0.8
         ).add_to(m)
 
-    st_folium(m, width=750, height=500)
+    # Display the map with full-width and no white space
+    st.markdown("---")
+    st_folium(m, height=520, use_container_width=True)
+
