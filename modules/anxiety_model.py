@@ -9,7 +9,7 @@ def calculate_anxiety_score(age, region, sector_risk, stress, news_exposure,
     sector_score = sector_risk * 2
     stress_score = stress * 2
     news_score = {"Never": 0, "Sometimes": 5, "Daily": 10, "Constantly": 15}[news_exposure]
-    disaster_score = 15 if experienced_disaster == "Yes" else 0
+    disaster_score = 15 if experienced_disaster == "yes" else 0
     resilience_score = (support + financial_security + future_agency) / 3 * 2
 
     raw = region_score + age_score + sector_score + stress_score + news_score + disaster_score
