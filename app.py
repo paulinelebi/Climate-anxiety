@@ -158,8 +158,8 @@ if "anxiety_score" in st.session_state:
 – Edmund Burke
 """)
 
-    st.markdown("## Compare regional risk")
-show_click_to_compare_map()
+                st.markdown("## Compare regional risk")
+                show_click_to_compare_map()
 
     st.markdown(f"### Please feel free to check out these resources in {st.session_state.location}")
     for r in get_local_resources(st.session_state.location):
