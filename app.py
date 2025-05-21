@@ -12,6 +12,27 @@ from modules.canada_climate_summary import get_provincial_climate_summary
 # --- Set page ---
 st.set_page_config(page_title="🌅 Climate Vulnerability Score", layout="wide")
 
+st.markdown("""
+    <style>
+    .stApp {
+        background: transparent;
+    }
+    video.bgvid {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        z-index: -1;
+        opacity: 0.15;
+        object-fit: cover;
+    }
+    </style>
+    <video class="bgvid" autoplay muted loop>
+        <source src="https://www.videvo.net/videvo_files/converted/2015_08/preview/Spinning_Earth_Loop.mp428825.webm" type="video/webm">
+    </video>
+""", unsafe_allow_html=True)
+
 # --- Audio helper ---
 def add_bg_audio(file_path):
     with open(file_path, "rb") as f:
