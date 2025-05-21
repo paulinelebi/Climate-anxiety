@@ -151,10 +151,7 @@ if "anxiety_score" in st.session_state:
     for rec in get_sector_actions(st.session_state.sector):
         st.markdown(f"- {rec}")
 
-  st.markdown("""
----
-
-#### and consider these other actions for climate and mental wellbeing:
+  st.markdown("""#### and, consider these other actions for climate and mental wellbeing:
 
 - **Join a local climate group** (e.g. Climate Reality Project, Fridays for Future)
 - **Talk to others**: climate anxiety gets worse in isolation. Invite conversation with your family, friends or others.
@@ -164,9 +161,6 @@ if "anxiety_score" in st.session_state:
 - **Support adaptation efforts**: donate to organizations building resilience in at-risk areas.
 - **Push institutions**: ask your university, workplace, or pension fund what their net-zero plan is.
 - **Start small**: grow herbs, cut a flight or subsidize those emissions, reuse more - behavioural shifts can help you to reduce feelings of helplessness.
-
----
-
 *"Nobody made a greater mistake than he who did nothing because he could only do a little."*  
 – Edmund Burke
 """)
