@@ -9,9 +9,9 @@ from modules.sector_actions import get_sector_actions
 from modules.location_profiles import get_canadian_provinces, get_regional_questions, get_local_resources
 from modules.canada_climate_summary import get_provincial_climate_summary
 
-st.set_page_config(page_title="🌍 Climate Vulnerability Score", layout="wide")
+st.set_page_config(page_title="Climate Vulnerability Score", layout="wide")
 
-# background video: earth in space  
+# setting the font, background video, style
 st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
@@ -58,7 +58,7 @@ st.markdown("""
     </style>
 
     <video class="bgvid" autoplay muted loop playsinline>
-        <source src="https://drive.google.com/uc?export=download&id=PASTE_YOUR_FILE_ID_HERE" type="video/mp4">
+        <source src="https://drive.google.com/uc?export=download&id=1Fcn9hUjVpp6cGUHUyGN7SFYFNFIdbW3s" type="video/mp4">
     </video>
 """, unsafe_allow_html=True)
 
