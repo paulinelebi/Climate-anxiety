@@ -85,22 +85,22 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # input form for users
-name = st.text_input("🧍‍♀️ What’s your name?", value="Solenne")
-age = st.slider("📆 Your age", 15, 80, 25)
-location = st.selectbox("🌎 Where in Canada do you live?", get_canadian_provinces())
-sector = st.selectbox("💼 Your work or study area", [
+name = st.text_input("What’s your name?", value="")
+age = st.slider("Your age", 15, 80, 25)
+location = st.selectbox("Where in Canada do you live?", get_canadian_provinces())
+sector = st.selectbox("Your work or study area", [
     "Energy", "Education", "Healthcare", "Finance", "Climate Research",
     "Technology", "Manufacturing", "Tourism", "Agriculture", "Not working", "Student"
 ])
-stress = st.slider("📊 Daily stress level", 1, 10, 5)
-support = st.slider("👥 Community support feeling", 1, 10, 5)
-financial_security = st.slider("💸 Financial security feeling", 1, 10, 5)
-future_agency = st.slider("🕊️ Control over your future", 1, 10, 5)
-climate_news = st.select_slider("📰 How often do you follow climate news?", ["Never", "Sometimes", "Daily", "Constantly"])
-has_experienced_disaster = st.radio("🌪️ Experienced a climate disaster?", ["Yes", "No"])
+stress = st.slider("Daily stress level", 1, 10, 5)
+support = st.slider("Community support feeling", 1, 10, 5)
+financial_security = st.slider("Financial security feeling", 1, 10, 5)
+future_agency = st.slider("Control over your future", 1, 10, 5)
+climate_news = st.select_slider("How often do you follow climate news?", ["Never", "Sometimes", "Daily", "Constantly"])
+has_experienced_disaster = st.radio("Experienced a climate disaster?", ["yes", "no"])
 
-st.markdown("### 🌍 Regional Questions")
-responses = [st.radio(q, ["Yes", "No"]) for q in get_regional_questions(location)]
+st.markdown("### Regional questions")
+responses = [st.radio(q, ["yes", "no"]) for q in get_regional_questions(location)]
 
 # button and score generator
 if st.button(" Analyse my score"):
@@ -123,38 +123,38 @@ if st.button(" Analyse my score"):
 
 # results
 if "anxiety_score" in st.session_state:
-    st.markdown("## 📈 Your Results")
+    st.markdown("##...your climate vulnerability score is:")
     d = st.session_state.summary_data
 
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.subheader("🌡️ Climate Outlook")
+        st.subheader("Climate outlook")
         st.metric("2020 Avg Temp", f"{d['2020_temp']}°C")
         st.metric("2050 Projection", f"{d['2050_temp']}°C")
         st.metric("Hot Days (2020)", f"{d['2020_hot_days']} days")
         st.metric("Hot Days (2050)", f"{d['2050_hot_days']} days")
 
     with col2:
-        st.subheader("💼 Sector Risk")
-        st.metric("Risk Level", f"{st.session_state.sector_risk}/10")
-        st.subheader("🧠 Anxiety Score")
+        st.subheader("Sector risk")
+        st.metric("Risk level", f"{st.session_state.sector_risk}/10")
+        st.subheader("Anxiety score")
         st.metric("Score", f"{st.session_state.anxiety_score}/100")
 
     with col3:
-        st.subheader("🔍 Regional Threats")
+        st.subheader("Regional threats")
         for t in d["top_threats"]:
             st.markdown(f"- {t}")
 
-    st.markdown("### 🌱 What You Can Do")
+    st.markdown("### Wondering what you can do? Try:")
     for rec in get_sector_actions(st.session_state.sector):
         st.markdown(f"- {rec}")
 
-    st.markdown(f"### 📚 Resources in {st.session_state.location}")
+    st.markdown(f"### Please feel free to check out these resources in {st.session_state.location}")
     for r in get_local_resources(st.session_state.location):
         st.markdown(f"- {r}")
 
-    with st.expander("📘 Methodology"):
+    with st.expander("The methodology"):
         st.markdown("""
         - Canadian climate data from Climate Atlas and Environment Canada.
         - Score = local climate exposure + sectoral risk + resilience factors.
