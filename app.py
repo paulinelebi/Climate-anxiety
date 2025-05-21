@@ -58,9 +58,10 @@ st.markdown("""
     </style>
 
     <video class="bgvid" autoplay muted loop playsinline>
-        <source src="https://drive.google.com/uc?export=download&id=1Fcn9hUjVpp6cGUHUyGN7SFYFNFIdbW3s" type="video/mp4">
+        <source src="https://cdn.coverr.co/videos/coverr-fishing-in-the-middle-of-the-ocean-uvjzrocvkb/1080p.mp4" type="video/mp4">
     </video>
 """, unsafe_allow_html=True)
+
 
 # ambient audio to set the mood
 def add_bg_audio(file_path):
