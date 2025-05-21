@@ -143,23 +143,23 @@ if "anxiety_score" in st.session_state:
             st.markdown(f"- {t}")
 
     st.markdown("""
-#### Consider these actions for your climate and mental wellbeing:
+        #### Consider these actions for your climate and mental wellbeing:
+        
+        - **Join a local climate group** (e.g. Climate Reality Project, Fridays for Future)
+        - **Talk to others**: climate anxiety gets worse in isolation. Invite conversation with your family, friends or others.
+        - **Advocate locally**: email your MP or MLA about policies tied to resilience, not just emissions.
+        - **Green your skills**: take a free online course in sustainability (Coursera, edX, FutureLearn)
+        - **Practice climate-aware self-care**: take breaks from doomscrolling; walk in nature.
+        - **Support adaptation efforts**: donate to organizations building resilience in at-risk areas.
+        - **Push institutions**: ask your university, workplace, or pension fund what their net-zero plan is.
+        - **Start small**: grow herbs, cut a flight or subsidize those emissions, reuse more - behavioural shifts can help you to reduce feelings of helplessness.
+        
+        *"Nobody made a greater mistake than he who did nothing because he could only do a little."*  
+        – Edmund Burke
+        """)
 
-- **Join a local climate group** (e.g. Climate Reality Project, Fridays for Future)
-- **Talk to others**: climate anxiety gets worse in isolation. Invite conversation with your family, friends or others.
-- **Advocate locally**: email your MP or MLA about policies tied to resilience, not just emissions.
-- **Green your skills**: take a free online course in sustainability (Coursera, edX, FutureLearn)
-- **Practice climate-aware self-care**: take breaks from doomscrolling; walk in nature.
-- **Support adaptation efforts**: donate to organizations building resilience in at-risk areas.
-- **Push institutions**: ask your university, workplace, or pension fund what their net-zero plan is.
-- **Start small**: grow herbs, cut a flight or subsidize those emissions, reuse more - behavioural shifts can help you to reduce feelings of helplessness.
-
-*"Nobody made a greater mistake than he who did nothing because he could only do a little."*  
-– Edmund Burke
-""")
-
-                st.markdown("## Compare regional risk")
-                show_click_to_compare_map()
+    st.markdown("## Compare regional risk")
+    show_click_to_compare_map()
 
     st.markdown(f"### Please feel free to check out these resources in {st.session_state.location}")
     for r in get_local_resources(st.session_state.location):
