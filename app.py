@@ -9,9 +9,9 @@ from modules.sector_actions import get_sector_actions
 from modules.location_profiles import get_canadian_provinces, get_regional_questions, get_local_resources
 from modules.canada_climate_summary import get_provincial_climate_summary
 
-# --- Set page ---
-st.set_page_config(page_title="🌅 Climate Vulnerability Score", layout="wide")
+st.set_page_config(page_title="🌍 Climate Vulnerability Score", layout="wide")
 
+# --- Background video: Earth in space (from Coverr) ---
 st.markdown("""
     <style>
     .stApp {
@@ -19,21 +19,21 @@ st.markdown("""
     }
     video.bgvid {
         position: fixed;
-        right: 0;
-        bottom: 0;
-        min-width: 100%;
-        min-height: 100%;
+        top: 0;
+        left: 0;
+        min-width: 100vw;
+        min-height: 100vh;
         z-index: -1;
-        opacity: 0.15;
+        opacity: 0.25;
         object-fit: cover;
     }
     </style>
-    <video class="bgvid" autoplay muted loop>
-        <source src="https://www.videvo.net/videvo_files/converted/2015_08/preview/Spinning_Earth_Loop.mp428825.webm" type="video/webm">
+    <video class="bgvid" autoplay muted loop playsinline>
+        <source src="https://cdn.coverr.co/videos/coverr-planet-earth-0917/1080p.mp4" type="video/mp4">
     </video>
 """, unsafe_allow_html=True)
 
-# --- Audio helper ---
+# --- Optional ambient audio ---
 def add_bg_audio(file_path):
     with open(file_path, "rb") as f:
         data = f.read()
@@ -46,55 +46,49 @@ def add_bg_audio(file_path):
 
 add_bg_audio("611610__djscreechingpossum__creepy-bioship-ambiance.mp3")
 
-# --- Style ---
+# --- Styling ---
 st.markdown("""
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
 
-html, body, [class*="css"] {
-    font-family: 'Playfair Display', serif;
-    background: linear-gradient(to bottom right, #ffecd2, #fcb69f);
-    color: #2f2f2f;
-}
+    html, body, [class*="css"] {
+        font-family: 'Playfair Display', serif;
+        color: #2f2f2f;
+    }
 
-.block-container {
-    padding: 2rem 3rem;
-    background-color: rgba(255, 255, 255, 0.75);
-    border-radius: 18px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-}
+    .block-container {
+        background-color: rgba(255, 255, 255, 0.75);
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
 
-h1, h2, h3 {
-    color: #b84d72;
-}
+    h1, h2, h3 {
+        color: #b84d72;
+    }
 
-.stButton>button {
-    background-color: #ffcad4;
-    color: #3e3e3e;
-    font-weight: bold;
-    border-radius: 30px;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    margin-top: 1rem;
-}
-
-.metric-container {
-    padding: 1rem;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.3);
-    margin-bottom: 1rem;
-}
-</style>
+    .stButton>button {
+        background-color: #ffcad4;
+        color: #3e3e3e;
+        border-radius: 25px;
+        padding: 0.75rem 1.5rem;
+        font-weight: bold;
+        font-size: 16px;
+        border: none;
+    }
+    </style>
 """, unsafe_allow_html=True)
 
 # --- Header ---
 st.markdown("""
-<h1 style='text-align: center;'>Climate Vulnerability Score</h1>
+<h1 style='text-align: center;'>🌿 Climate Vulnerability Score</h1>
 <p style='text-align: center; font-size: 20px;'>Understand your risks. Receive support. Take action.</p>
-<blockquote style='text-align: center; font-style: italic;'>“In the depth of winter, I finally learned that within me there lay an invincible summer.” — Albert Camus</blockquote>
+<blockquote style='text-align: center; font-style: italic; color: #5c4a55;'>
+    “In the depth of winter, I finally learned that within me there lay an invincible summer.” – Albert Camus
+</blockquote>
 """, unsafe_allow_html=True)
 
-# --- Input Form ---
+# --- Input form ---
 name = st.text_input("🧍‍♀️ What’s your name?", value="Solenne")
 age = st.slider("📆 Your age", 15, 80, 25)
 location = st.selectbox("🌎 Where in Canada do you live?", get_canadian_provinces())
@@ -112,7 +106,7 @@ has_experienced_disaster = st.radio("🌪️ Experienced a climate disaster?", [
 st.markdown("### 🌍 Regional Questions")
 responses = [st.radio(q, ["Yes", "No"]) for q in get_regional_questions(location)]
 
-# --- Run Model ---
+# --- Process ---
 if st.button("✨ Analyze My Score"):
     region = location.split(" - ")[0]
     summary_data = get_provincial_climate_summary(location)
@@ -133,7 +127,7 @@ if st.button("✨ Analyze My Score"):
 
 # --- Results ---
 if "anxiety_score" in st.session_state:
-    st.markdown("## 🌸 Your Results")
+    st.markdown("## 📈 Your Results")
     d = st.session_state.summary_data
 
     col1, col2, col3 = st.columns(3)
@@ -147,7 +141,7 @@ if "anxiety_score" in st.session_state:
 
     with col2:
         st.subheader("💼 Sector Risk")
-        st.metric("Risk", f"{st.session_state.sector_risk}/10")
+        st.metric("Risk Level", f"{st.session_state.sector_risk}/10")
         st.subheader("🧠 Anxiety Score")
         st.metric("Score", f"{st.session_state.anxiety_score}/100")
 
