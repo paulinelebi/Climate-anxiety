@@ -8,6 +8,7 @@ from modules.visuals import plot_temperature_trend, show_climate_map
 from modules.sector_actions import get_sector_actions
 from modules.location_profiles import get_canadian_provinces, get_regional_questions, get_local_resources
 from modules.canada_climate_summary import get_provincial_climate_summary
+from modules.map_compare import show_click_to_compare_map
 
 st.set_page_config(page_title="Climate Vulnerability Score", layout="wide")
 
@@ -156,6 +157,9 @@ if "anxiety_score" in st.session_state:
 *"Nobody made a greater mistake than he who did nothing because he could only do a little."*  
 – Edmund Burke
 """)
+
+    st.markdown("## Compare regional risk")
+show_click_to_compare_map()
 
     st.markdown(f"### Please feel free to check out these resources in {st.session_state.location}")
     for r in get_local_resources(st.session_state.location):
